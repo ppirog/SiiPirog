@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +26,6 @@ public class CollectionBoxService {
 
     public List<CollectionBox> getAllBoxes() {
         return collectionBoxRepository.findAll();
-    }
-
-    public Optional<CollectionBox> getBoxById(Long id) {
-        return collectionBoxRepository.findById(id);
     }
 
     public void deleteBox(Long id) {
@@ -105,12 +100,6 @@ public class CollectionBoxService {
 
         return collectionBoxRepository.save(box);
     }
-
-    public CollectionBox save(CollectionBox box) {
-        return collectionBoxRepository.save(box);
-    }
-
-
 
 
     private static final Map<String, BigDecimal> EXCHANGE_RATES = Map.ofEntries(

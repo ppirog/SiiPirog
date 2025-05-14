@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +37,4 @@ public class FundraisingEventService {
         return fundraisingEventRepository.findAll();
     }
 
-    public Optional<FundraisingEvent> getEventById(Long id) {
-        return fundraisingEventRepository.findById(id);
-    }
 }
