@@ -70,7 +70,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8088/events?name=HOSPICJUM",
+					"raw": "http://localhost:8088/events?name=KLASZTOR",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -82,7 +82,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "HOSPICJUM"
+							"value": "KLASZTOR"
 						}
 					]
 				}
@@ -134,7 +134,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8088/boxes/6/assign/3",
+					"raw": "http://localhost:8088/boxes/11/assign/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -142,9 +142,9 @@
 					"port": "8088",
 					"path": [
 						"boxes",
-						"6",
+						"11",
 						"assign",
-						"3"
+						"4"
 					]
 				}
 			},
@@ -157,7 +157,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"currency\":\"PLN\",\r\n    \"amount\": 120.15\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -165,7 +165,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8088/boxes/6/transfer",
+					"raw": "http://localhost:8088/boxes/11/transfer",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -173,7 +173,7 @@
 					"port": "8088",
 					"path": [
 						"boxes",
-						"6",
+						"11",
 						"transfer"
 					]
 				}
@@ -195,7 +195,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8088/boxes/6/add-money",
+					"raw": "http://localhost:8088/boxes/11/add-money",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -203,7 +203,7 @@
 					"port": "8088",
 					"path": [
 						"boxes",
-						"6",
+						"11",
 						"add-money"
 					]
 				}
