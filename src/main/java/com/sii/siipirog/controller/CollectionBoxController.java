@@ -1,7 +1,7 @@
 package com.sii.siipirog.controller;
 
-import com.sii.siipirog.dto.CollectionBoxDto;
 import com.sii.siipirog.dto.AddMoneyRequestDto;
+import com.sii.siipirog.dto.CollectionBoxDto;
 import com.sii.siipirog.mapper.CollectionBoxMapper;
 import com.sii.siipirog.model.CollectionBox;
 import com.sii.siipirog.service.CollectionBoxService;
