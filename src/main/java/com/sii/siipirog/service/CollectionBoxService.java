@@ -49,6 +49,20 @@ public class CollectionBoxService {
         return collectionBoxRepository.save(box);
     }
 
+    public CollectionBox addMoney(Long boxId, String currency, BigDecimal amount) {
+        CollectionBox box = collectionBoxRepository.findById(boxId)
+                .orElseThrow(() -> new ErrorMessageException("CollectionBox not found"));
+
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new ErrorMessageException("Amount must be positive");
+        }
+
+        BigDecimal current = box.getMoney().getOrDefault(currency, BigDecimal.ZERO);
+        box.getMoney().put(currency, current.add(amount));
+
+        return collectionBoxRepository.save(box);
+    }
+
     public CollectionBox save(CollectionBox box) {
         return collectionBoxRepository.save(box);
     }

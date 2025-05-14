@@ -1,6 +1,7 @@
 package com.sii.siipirog.controller;
 
 import com.sii.siipirog.dto.CollectionBoxDto;
+import com.sii.siipirog.dto.AddMoneyRequestDto;
 import com.sii.siipirog.mapper.CollectionBoxMapper;
 import com.sii.siipirog.model.CollectionBox;
 import com.sii.siipirog.service.CollectionBoxService;
@@ -37,5 +38,10 @@ public class CollectionBoxController {
     @PutMapping("/{boxId}/assign/{eventId}")
     public CollectionBox assignBoxToEvent(@PathVariable Long boxId, @PathVariable Long eventId) {
         return collectionBoxService.assignToEvent(boxId, eventId);
+    }
+
+    @PutMapping("/{boxId}/add-money")
+    public CollectionBox addMoney(@PathVariable Long boxId, @RequestBody AddMoneyRequestDto requestDto) {
+        return collectionBoxService.addMoney(boxId, requestDto.getCurrency(), requestDto.getAmount());
     }
 }
