@@ -86,4 +86,13 @@ class CollectionBoxServiceTest {
 
         assertEquals("CollectionBox not found", exception.getMessage());
     }
+
+    @Test
+    void deleteBox_shouldCallRepositoryDelete() {
+        Long boxId = 1L;
+
+        collectionBoxService.deleteBox(boxId);
+
+        verify(collectionBoxRepository, times(1)).deleteById(boxId);
+    }
 }
