@@ -250,7 +250,4 @@ class CollectionBoxServiceTest {
 
         assertEquals("FundraisingEvent not found", exception.getMessage());
     }
-
-    // report
-
 }
