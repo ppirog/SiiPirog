@@ -15,10 +15,10 @@ public class FundraisingEventService {
 
     private final FundraisingEventRepository fundraisingEventRepository;
 
-    public FundraisingEvent createEvent(String name, String currency) {
+    public FundraisingEvent createEvent(String name) {
         FundraisingEvent event = new FundraisingEvent();
         event.setName(name);
-        event.setCurrency(currency);
+        event.setCurrency("PLN");
         event.setAccountBalance(BigDecimal.ZERO);
         return fundraisingEventRepository.save(event);
     }

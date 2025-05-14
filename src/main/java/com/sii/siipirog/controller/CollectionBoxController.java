@@ -44,4 +44,10 @@ public class CollectionBoxController {
     public CollectionBox addMoney(@PathVariable Long boxId, @RequestBody AddMoneyRequestDto requestDto) {
         return collectionBoxService.addMoney(boxId, requestDto.getCurrency(), requestDto.getAmount());
     }
+
+    @PutMapping("/{boxId}/transfer")
+    public void transferMoney(@PathVariable Long boxId) {
+        collectionBoxService.transferMoney(boxId);
+    }
+
 }
