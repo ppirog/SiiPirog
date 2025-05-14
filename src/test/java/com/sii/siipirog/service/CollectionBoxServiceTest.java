@@ -79,9 +79,9 @@ class CollectionBoxServiceTest {
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
         when(fundraisingEventRepository.existsById(10L)).thenReturn(false);
 
-        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
-            collectionBoxService.assignToEvent(1L, 10L);
-        });
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.assignToEvent(1L, 10L)
+        );
 
         assertEquals("FundraisingEvent not found", exception.getMessage());
     }
