@@ -1,6 +1,6 @@
 package com.sii.siipirog.controller;
 
-import com.sii.siipirog.dto.*;
+import com.sii.siipirog.dto.FinancialReportDto;
 import com.sii.siipirog.model.FundraisingEvent;
 import com.sii.siipirog.service.FundraisingEventService;
 import lombok.RequiredArgsConstructor;
