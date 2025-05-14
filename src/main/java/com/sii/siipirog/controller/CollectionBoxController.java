@@ -1,10 +1,13 @@
 package com.sii.siipirog.controller;
 
+import com.sii.siipirog.dto.CollectionBoxDto;
+import com.sii.siipirog.mapper.CollectionBoxMapper;
 import com.sii.siipirog.model.CollectionBox;
 import com.sii.siipirog.service.CollectionBoxService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -20,9 +23,13 @@ public class CollectionBoxController {
     }
 
     @GetMapping
-    public List<CollectionBox> getAllBoxes() {
-        return collectionBoxService.getAllBoxes();
+    public List<CollectionBoxDto> getAllBoxes() {
+        return collectionBoxService.getAllBoxes().stream()
+                .map(CollectionBoxMapper::toDto)
+                .toList();
     }
+
+
 
     @DeleteMapping("/{id}")
     public void deleteBox(@PathVariable Long id) {
