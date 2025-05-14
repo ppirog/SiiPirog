@@ -49,9 +49,15 @@ public class CollectionBoxService {
             throw new ErrorMessageException("CollectionBox is not empty. Cannot assign to event.");
         }
 
+        boolean eventExists = fundraisingEventRepository.existsById(eventId);
+        if (!eventExists) {
+            throw new ErrorMessageException("FundraisingEvent not found");
+        }
+
         box.setFundraisingEventId(eventId);
         return collectionBoxRepository.save(box);
     }
+
 
     public void transferMoney(Long boxId) {
         CollectionBox box = collectionBoxRepository.findById(boxId)
