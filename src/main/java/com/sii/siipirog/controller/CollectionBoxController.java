@@ -29,8 +29,6 @@ public class CollectionBoxController {
                 .toList();
     }
 
-
-
     @DeleteMapping("/{id}")
     public void deleteBox(@PathVariable Long id) {
         collectionBoxService.deleteBox(id);
