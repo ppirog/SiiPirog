@@ -1,5 +1,6 @@
 package com.sii.siipirog.controller;
 
+import com.sii.siipirog.dto.*;
 import com.sii.siipirog.model.FundraisingEvent;
 import com.sii.siipirog.service.FundraisingEventService;
 import lombok.RequiredArgsConstructor;
@@ -23,4 +24,10 @@ public class FundraisingEventController {
     public List<FundraisingEvent> getAllEvents() {
         return fundraisingEventService.getAllEvents();
     }
+
+    @GetMapping("/report")
+    public List<FinancialReportDto> getFinancialReport() {
+        return fundraisingEventService.getFinancialReport();
+    }
+
 }
