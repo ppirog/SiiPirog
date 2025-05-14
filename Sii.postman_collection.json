@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "22fb2e12-23f9-4df7-abb8-38bdaec6fc40",
+		"name": "Sii",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30172904"
+	},
+	"item": [
+		{
+			"name": "/boxes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/boxes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"boxes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/boxes/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/boxes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"boxes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/boxes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/boxes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"boxes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/events",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/events?name=HOSPICJUM",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"events"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "HOSPICJUM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/events/report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"events",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/{id}/assign/{eventId}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/boxes/6/assign/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"boxes",
+						"6",
+						"assign",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{boxId}/transfer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currency\":\"PLN\",\r\n    \"amount\": 120.15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/boxes/6/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"boxes",
+						"6",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/{boxId}/add-money",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currency\":\"PLN\",\r\n    \"amount\":100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/boxes/6/add-money",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"boxes",
+						"6",
+						"add-money"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
