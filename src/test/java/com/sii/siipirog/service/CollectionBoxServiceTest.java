@@ -2,7 +2,9 @@ package com.sii.siipirog.service;
 
 import com.sii.siipirog.exception.ErrorMessageException;
 import com.sii.siipirog.model.CollectionBox;
+import com.sii.siipirog.model.FundraisingEvent;
 import com.sii.siipirog.repository.CollectionBoxRepository;
+import com.sii.siipirog.repository.FundraisingEventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,6 +23,9 @@ class CollectionBoxServiceTest {
 
     @Mock
     private CollectionBoxRepository collectionBoxRepository;
+
+    @Mock
+    private FundraisingEventRepository fundraisingEventRepository;
 
     @InjectMocks
     private CollectionBoxService collectionBoxService;
@@ -133,9 +138,9 @@ class CollectionBoxServiceTest {
     void addMoney_shouldThrowIfBoxNotFound() {
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.empty());
 
-        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
-            collectionBoxService.addMoney(1L, "EUR", BigDecimal.valueOf(100));
-        });
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.addMoney(1L, "EUR", BigDecimal.valueOf(100))
+        );
 
         assertEquals("CollectionBox not found", exception.getMessage());
     }
@@ -148,10 +153,83 @@ class CollectionBoxServiceTest {
 
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
 
-        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
-            collectionBoxService.addMoney(1L, "EUR", BigDecimal.ZERO);
-        });
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.addMoney(1L, "EUR", BigDecimal.ZERO)
+        );
 
         assertEquals("Amount must be positive", exception.getMessage());
+    }
+
+
+    // transfer money
+    @Test
+    void transferMoney_shouldTransferAndEmptyBox() {
+        CollectionBox box = new CollectionBox();
+        box.setId(1L);
+        box.setFundraisingEventId(10L);
+        Map<String, BigDecimal> money = new HashMap<>();
+        money.put("USD", BigDecimal.valueOf(100));
+        money.put("EUR", BigDecimal.valueOf(50));
+        box.setMoney(money);
+
+        FundraisingEvent event = new FundraisingEvent();
+        event.setId(10L);
+        event.setAccountBalance(BigDecimal.valueOf(0));
+        event.setCurrency("PLN");
+
+        when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
+        when(fundraisingEventRepository.findById(10L)).thenReturn(Optional.of(event));
+
+        collectionBoxService.transferMoney(1L);
+
+        // USD (100 x 4.00 PLN) + EUR (50 x 4.30 PLN) = 400 + 215 = 615
+        assertEquals(BigDecimal.valueOf(615.00), event.getAccountBalance());
+
+        assertTrue(box.getMoney().values().stream().allMatch(amount -> amount.compareTo(BigDecimal.ZERO) == 0));
+
+        verify(collectionBoxRepository, times(1)).save(box);
+        verify(fundraisingEventRepository, times(1)).save(event);
+    }
+
+    @Test
+    void transferMoney_shouldThrowWhenBoxNotFound() {
+        when(collectionBoxRepository.findById(1L)).thenReturn(Optional.empty());
+
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.transferMoney(1L)
+        );
+
+        assertEquals("CollectionBox not found", exception.getMessage());
+    }
+
+    @Test
+    void transferMoney_shouldThrowWhenBoxNotAssigned() {
+        CollectionBox box = new CollectionBox();
+        box.setId(1L);
+        box.setFundraisingEventId(null);
+
+        when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
+
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.transferMoney(1L)
+        );
+
+        assertEquals("CollectionBox is not assigned to any event", exception.getMessage());
+    }
+
+    @Test
+    void transferMoney_shouldThrowWhenEventNotFound() {
+        CollectionBox box = new CollectionBox();
+        box.setId(1L);
+        box.setFundraisingEventId(10L);
+
+        when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
+        when(fundraisingEventRepository.findById(10L)).thenReturn(Optional.empty());
+
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.transferMoney(1L)
+        );
+
+        assertEquals("FundraisingEvent not found", exception.getMessage());
     }
 }

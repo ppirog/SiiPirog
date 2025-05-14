@@ -8,7 +8,6 @@ import com.sii.siipirog.service.CollectionBoxService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -44,4 +43,10 @@ public class CollectionBoxController {
     public CollectionBox addMoney(@PathVariable Long boxId, @RequestBody AddMoneyRequestDto requestDto) {
         return collectionBoxService.addMoney(boxId, requestDto.getCurrency(), requestDto.getAmount());
     }
+
+    @PutMapping("/{boxId}/transfer")
+    public void transferMoney(@PathVariable Long boxId) {
+        collectionBoxService.transferMoney(boxId);
+    }
+
 }

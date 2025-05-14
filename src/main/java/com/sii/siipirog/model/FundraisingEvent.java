@@ -21,7 +21,7 @@ public class FundraisingEvent {
 
     private String name;
 
-    private String currency;
+    private String currency = "PLN";
 
     private BigDecimal accountBalance = BigDecimal.ZERO;
 }

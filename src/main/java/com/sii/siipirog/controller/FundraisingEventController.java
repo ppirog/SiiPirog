@@ -15,8 +15,8 @@ public class FundraisingEventController {
     private final FundraisingEventService fundraisingEventService;
 
     @PostMapping
-    public FundraisingEvent createEvent(@RequestParam String name, @RequestParam String currency) {
-        return fundraisingEventService.createEvent(name, currency);
+    public FundraisingEvent createEvent(@RequestParam String name) {
+        return fundraisingEventService.createEvent(name);
     }
 
     @GetMapping
