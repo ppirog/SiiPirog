@@ -138,9 +138,9 @@ class CollectionBoxServiceTest {
     void addMoney_shouldThrowIfBoxNotFound() {
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.empty());
 
-        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
-            collectionBoxService.addMoney(1L, "EUR", BigDecimal.valueOf(100));
-        });
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.addMoney(1L, "EUR", BigDecimal.valueOf(100))
+        );
 
         assertEquals("CollectionBox not found", exception.getMessage());
     }
@@ -153,9 +153,9 @@ class CollectionBoxServiceTest {
 
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
 
-        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
-            collectionBoxService.addMoney(1L, "EUR", BigDecimal.ZERO);
-        });
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.addMoney(1L, "EUR", BigDecimal.ZERO)
+        );
 
         assertEquals("Amount must be positive", exception.getMessage());
     }
