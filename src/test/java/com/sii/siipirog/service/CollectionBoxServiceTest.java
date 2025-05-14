@@ -45,6 +45,7 @@ class CollectionBoxServiceTest {
         box.setMoney(Map.of("EUR", BigDecimal.ZERO));
 
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
+        when(fundraisingEventRepository.existsById(10L)).thenReturn(true);
         when(collectionBoxRepository.save(any(CollectionBox.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         CollectionBox result = collectionBoxService.assignToEvent(1L, 10L);
@@ -66,6 +67,23 @@ class CollectionBoxServiceTest {
         );
 
         assertEquals("CollectionBox is already assigned to an event", exception.getMessage());
+    }
+
+    @Test
+    void assignToEvent_shouldThrowWhenEventNotExists() {
+        CollectionBox box = new CollectionBox();
+        box.setId(1L);
+        box.setFundraisingEventId(null);
+        box.setMoney(new HashMap<>());
+
+        when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
+        when(fundraisingEventRepository.existsById(10L)).thenReturn(false);
+
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
+            collectionBoxService.assignToEvent(1L, 10L);
+        });
+
+        assertEquals("FundraisingEvent not found", exception.getMessage());
     }
 
     @Test
@@ -232,4 +250,7 @@ class CollectionBoxServiceTest {
 
         assertEquals("FundraisingEvent not found", exception.getMessage());
     }
+
+    // report
+
 }
