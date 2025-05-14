@@ -53,9 +53,9 @@ class CollectionBoxServiceTest {
 
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
 
-        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
-            collectionBoxService.assignToEvent(1L, 10L);
-        });
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.assignToEvent(1L, 10L)
+        );
 
         assertEquals("CollectionBox is already assigned to an event", exception.getMessage());
     }
@@ -69,9 +69,9 @@ class CollectionBoxServiceTest {
 
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.of(box));
 
-        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
-            collectionBoxService.assignToEvent(1L, 10L);
-        });
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.assignToEvent(1L, 10L)
+        );
 
         assertEquals("CollectionBox is not empty. Cannot assign to event.", exception.getMessage());
     }
@@ -80,9 +80,9 @@ class CollectionBoxServiceTest {
     void assignToEvent_shouldThrowWhenBoxNotFound() {
         when(collectionBoxRepository.findById(1L)).thenReturn(Optional.empty());
 
-        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () -> {
-            collectionBoxService.assignToEvent(1L, 10L);
-        });
+        ErrorMessageException exception = assertThrows(ErrorMessageException.class, () ->
+                collectionBoxService.assignToEvent(1L, 10L)
+        );
 
         assertEquals("CollectionBox not found", exception.getMessage());
     }
