@@ -1,6 +1,7 @@
 package com.sii.siipirog.mapper;
 
 import com.sii.siipirog.dto.CollectionBoxDto;
+import com.sii.siipirog.dto.CollectionBoxFullDto;
 import com.sii.siipirog.model.CollectionBox;
 
 import java.math.BigDecimal;
@@ -17,5 +18,13 @@ public class CollectionBoxMapper {
                 .isAssigned(isAssigned)
                 .isEmpty(isEmpty)
                 .build();
+    }
+
+    public static CollectionBoxFullDto toFullDto(CollectionBox box) {
+        return new CollectionBoxFullDto(
+                box.getId(),
+                box.getFundraisingEventId(),
+                box.getMoney()
+        );
     }
 }
